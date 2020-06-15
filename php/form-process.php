@@ -51,7 +51,7 @@ if (empty($_POST["message"])) {
 }
 
 
-$EmailTo = "paulinalara@tlsolution.net";
+$EmailTo = "paulina.lara@tl-solution.com";
 $Subject = "New Message Received";
 
 // prepare email body text
