@@ -1,0 +1,1118 @@
+html, body{
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    background-color: gainsboro;
+}
+h1, h2, h3, h4, p{
+    font-family: 'Montserrat', sans-serif;
+}
+/*Encabezado*/
+.encabezado{
+    margin-left: 4.5%;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    height: auto;
+}
+.logo{
+    width: 25%;
+}
+.logo img{
+    width: 80%;
+}
+.menu{
+    width: 70%;
+    align-self: flex-end;
+    justify-content: space-evenly;
+    display: flex;
+}
+.menubox{
+    width: 20%;
+    border-right: 2px solid rgba(247, 207, 43, 1);
+    text-align: center;
+    align-self: center;
+    padding: 0.75% 0;
+}
+.menubox:hover{
+    cursor: pointer;
+    filter: drop-shadow(.5px 1px .5px black);
+}
+.encabezado .menu a{
+    font-size: medium;
+    align-content: baseline;
+    color : rgb(3, 80, 127);
+    font-weight: bold;
+    text-decoration: none;
+}
+/*Slider*/
+.galleryContainer{
+    width: 82%;
+    height: 45vw;
+    margin: auto;
+    user-select: none;
+    box-shadow: 0px 0px 3px 1px #00000078;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 5%;
+}
+.galleryContainer .slideShowContainer{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: gainsboro;
+    position: relative;
+}
+.galleryContainer .slideShowContainer #playPause{
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background-image: url(img/playPause.png);
+    background-repeat: no-repeat;
+    z-index: 5;
+    background-size: cover;
+    margin: 5px;
+    cursor: pointer;
+}
+.galleryContainer .slideShowContainer #playPause:hover{
+    opacity: .7;
+}
+.galleryContainer .slideShowContainer .imageHolder{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+}
+.galleryContainer .slideShowContainer .imageHolder img{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.galleryContainer .slideShowContainer .imageHolder .captionText{
+    display: none;
+}
+
+.galleryContainer .slideShowContainer .leftArrow,.galleryContainer .slideShowContainer .rightArrow{
+    width: 50px;
+    background: rgba(0, 81, 143, 0.39);
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    transition: background 0.5s;
+    height: 72px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.galleryContainer .slideShowContainer .rightArrow{
+    left: auto;
+    right: 0;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.galleryContainer .slideShowContainer .leftArrow:hover,.galleryContainer .slideShowContainer .rightArrow:hover{
+    background: #000000a8;
+    cursor: pointer;
+}
+.galleryContainer .arrow{
+    display: inline-block;
+    border: 3px solid white;
+    width: 10px;
+    height: 10px;
+    border-left: none;
+    border-bottom: none;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.galleryContainer .arrow.arrowLeft{
+    transform: rotateZ(-135deg);
+}
+.galleryContainer .arrow.arrowRight{
+    transform: rotateZ(45deg);
+}
+
+
+.galleryContainer .slideShowContainer>.captionTextHolder{
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    background: #00000047;
+    height: 4vw;
+    line-height: 50px;
+    overflow: hidden;
+}
+.galleryContainer .slideShowContainer>.captionTextHolder>.captionText{
+    margin: 0;
+}
+
+.galleryContainer #dotsContainer{
+    width: 100%;
+    height: 10%;
+    text-align: right;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+.galleryContainer #dotsContainer .dots{
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    margin-left: 5px;
+    background-color: #bbb;
+    cursor: pointer;
+    transition:background-color 0.5s;
+}
+.galleryContainer #dotsContainer .dots:first-child{
+    margin-left: 0;
+}
+.galleryContainer #dotsContainer .dots:hover,.galleryContainer #dotsContainer .dots.active{
+    background-color: rgb(0, 81, 143);;
+}
+.galleryContainer .moveLeftCurrentSlide{
+    animation-name: moveLeftCurrent;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+
+}
+.galleryContainer .moveLeftNextSlide{
+    animation-name: moveLeftNext;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+}
+@keyframes moveLeftCurrent {
+    from {margin-left: 0;opacity: 1;}
+    to {margin-left: -100%;opacity: 1;}
+}
+@keyframes moveLeftNext {
+    from {margin-left: 100%;opacity: 1;}
+    to {margin-left: 0%;opacity: 1;}
+}
+
+
+.galleryContainer .moveRightCurrentSlide{
+    animation-name: moveRightCurrent;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+}
+.galleryContainer .moveRightPrevSlide{
+    animation-name: moveRightPrev;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode:forwards;
+}
+@keyframes moveRightCurrent {
+    from {margin-left: 0;opacity: 1;}
+    to {margin-left: 100%;opacity: 1;}
+}
+@keyframes moveRightPrev {
+    from {margin-left: -100%;opacity: 1;}
+    to {margin-left: 0%;opacity: 1;}
+}
+.slideTextFromBottom {
+    animation-name: slideTextFromBottom;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+@keyframes slideTextFromBottom {
+    from {opacity: 0;margin-top: 100px}
+    to {opacity: 1;margin-top: 0px;}
+}
+.slideTextFromTop {
+    animation-name: slideTextFromTop;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+@keyframes slideTextFromTop {
+    from {opacity: 0;margin-top: -100px}
+    to {opacity: 1;margin-top: 0px;}
+}
+/*Ventana 1*/
+.ventana1{
+    max-width: 100%;
+    display: flex;
+    margin-top: 7vw;
+    margin-left: 6.5%;
+    justify-content: left;
+    max-height: 40vw;
+}
+.ventana1 img{
+    width: 94%; 
+    object-fit: contain; 
+    height: auto;
+}
+/*Ventana 2*/
+.ventana2{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 7vw;
+    max-width: 100%;
+    background-image: url("../img/Recurso\ 7.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-bottom: 5%;
+}
+.titulo{
+    width: 100%;
+    margin-left: 6.5%;
+}
+.titulo h1{
+  font-family : 'Montserrat', ;
+  font-weight : bold;
+  font-style : italic;
+  font-size : xx-large;
+  color : #00518F;
+  color : rgb(0, 81, 143);
+}
+.cajas{
+    width: 49%;
+    height: auto;
+}
+#Flecha{
+    width: 12%;
+    margin: 3% 0;
+}
+#Flecha img{
+    object-fit: cover;
+    max-width: 80%;
+    margin: 25% 0;
+}
+.rectangulo{
+    width: 100%;
+    display: flex;
+    border: .5px solid #03507F;
+    min-height: 25%;
+    text-decoration: none;
+}
+.rectangulo:hover{
+    cursor: pointer;
+    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.603));
+}
+.interno{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.interno img{
+    max-width: 50%;
+}
+.interno img:hover{
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+.interno h2{
+    font-weight: 500;
+    color : #03507F;
+    font-size: larger;
+}
+.interno h2:hover{
+    cursor: pointer;
+    color: rgba(247, 207, 43, 1);
+}
+/*Ventana 3*/
+.ventana3{
+    width: 100%;
+    display: flex;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+.texto{
+    margin-left: 6.5%;
+    margin-right: 7%;
+    text-align: justify;
+    margin-bottom: 5%;
+}
+.texto p{
+  color : #03507F;
+  color : rgb(3, 80, 127);
+  font-weight: 300;
+  font-size: larger;
+}
+.clientes{
+    width: 100%;
+    padding-bottom: 10%;
+    border-bottom: 1px solid #03507F;
+    background-image: linear-gradient(0deg, rgb(196, 215, 226), transparent);
+    text-align: center;
+}
+.clientes img{
+    width: 90%;
+}
+/*Ventana 4*/
+.ventana4{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-image: linear-gradient(0deg, rgba(50, 142, 199, 0.91),rgb(196, 215, 226));
+    justify-content: space-between;
+    padding-top: 2%;
+}
+#Textoform{
+    margin-bottom: 3%;
+    width: 100%;
+}
+.formulario{
+    width: 50%;
+}
+.logofinal{
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+.logofin{
+    width: 80%;
+    align-items: start;
+}
+.logofin img{
+    width: 85%;
+}
+.redes{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    text-align-last: justify;
+    align-self: center;
+    margin-top: 9%;
+}
+.cajasredes{ 
+    display: flex;
+    width: 100%;                             
+    align-items: center;
+    text-decoration: none;
+}
+.redes1{
+    width: 15%;
+}
+.redes1 img{
+    width: 80%;
+}
+.redes1 img:hover{
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50% 50% 1px;
+    border: 1px solid white;
+}
+.redes2{
+    width: 50%;
+}
+.redes2 h3{
+  color : #03507F;
+  color : rgb(3, 80, 127);
+  font-family : 'Montserrat', ;
+  font-weight: 600;
+  font-size: larger;
+  font-style: italic;
+  padding-left: 15%;
+}
+.redes2 h3:hover{
+    color: white;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.623));
+}
+label{
+  color : #03507F;
+  color : rgb(3, 80, 127);
+  font-family : 'Montserrat', ;
+  font-weight: 300;
+  font-size: larger;
+  margin: 1% 0;
+}
+input{
+    height: 2rem;
+    background: transparent;
+    border: .5px solid #03507F;
+}
+textarea{
+    height: 4rem;
+    background: transparent;
+    border: .5px solid #03507F;
+}
+button{
+    margin-top: 1%;
+    font-size: medium;
+    background: #03507F;
+    border: none;
+    color: white;
+    font-family : 'Montserrat', ;
+    border-radius: 1px;
+    font-style: italic;
+}
+button:hover{
+    cursor:pointer;
+    background-color: rgba(247, 207, 43, 1);
+    border: 1px solid transparent;
+}
+.logofinal{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+/*footer*/
+.footer{
+    width: 100%;
+    display: flex;
+    margin-top: 10%;
+}
+.caja1{
+    width: 60%;
+    height: 100%;
+    text-align: end;
+    border-right: .5px solid white;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.caja1 p{
+  font-family : 'Montserrat';
+  font-weight : 500;
+  font-size : 1.2vw;
+  color : #F0F0F0;
+  color : rgb(240, 240, 240);
+}
+.caja1 p:hover{
+    cursor: pointer;
+    filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.637));
+}
+.footer p, img{
+    margin: 0 2vw;
+}
+.caja2{
+    width: 50%;
+    height: 100%;
+    margin-bottom: 1vw;
+}
+.caja2 p{
+  font-family : 'Montserrat';
+  font-weight : bold;
+  font-style : italic;
+  font-size : 1.2vw;
+  color : #F0F0F0;
+  color : rgb(240, 240, 240);
+}
+.llamadas{
+    display: flex;
+}
+#iconollama{
+    width: 2vw;
+    filter: invert(1);
+}
+#iconollama:hover{
+    cursor: pointer;
+    filter: brightness(0.5);
+}
+#llamadas{
+    width: 2vw;
+}
+#llamadas:hover{
+    cursor: pointer;
+    filter: brightness(0.5);
+}
+.footer2{
+    width: 100%;
+    display: flex;
+    margin-top: 7%;
+}
+.footer2 p, img{
+    margin: 0 2vw;
+}
+.caja2  p:hover{
+    cursor: pointer;
+    filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.637));
+}
+/*Firma*/
+.firma{
+    text-align: center;
+    width: 100%;
+    margin-top: 5%;
+}
+.firma p, a{
+  font-family : 'Montserrat';
+  font-weight : lighter;
+  font-size : 1.2vw;
+  color : #F0F0F0;
+  color : rgb(240, 240, 240);
+  text-decoration: none;
+}
+/*Secreto*/
+.secreto{
+    width: 100%;
+    height: .1px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.secreto h6{
+    margin: 0;
+    padding: 0;
+    font-size: .1px;
+}
+/*Responsive*/
+@media screen and (max-width: 780px){
+    .encabezado{
+        flex-flow: column wrap;
+        text-align: center;
+        margin-left: 0;
+    }
+    .logo{
+        width: 80%;
+        align-self: center;
+    }
+    .encabezado .menu a{
+        font-size: xx-small;
+        display: block;
+        padding: 2% 0;
+    }
+    .menu{
+        width: 100%;
+        flex-wrap: wrap;
+        margin-top: 4%;
+        -webkit-box-pack: center;
+    }
+    .menubox{
+        flex-grow: 3;
+        padding: 0 6px;
+        margin-top: 3px;
+    }
+    .ventana1{
+        margin-top: 10vw;
+        margin-left: 0;
+        justify-content: center;
+    }
+    .cajas{
+        width: 68%;
+    }
+    .titulo h1{
+        font-size: large;
+    }
+    .titulo{
+        margin-left: 3%;
+    }
+    .interno h2{
+        font-size: small;
+    }
+    #Flecha{
+        margin-top: 6%; 
+        width: 13%;
+    }
+    #Flecha img{
+        margin-top: 15%;
+    }
+    .texto p{
+        font-size: small;
+    }
+    label{
+        font-size: small;
+    }
+    button{
+        font-size: x-small;
+    }
+    .caja2 p{
+        font-size: xx-small;
+        font-weight: 400;
+    }
+    .caja1 p{
+        font-size: xx-small;
+        font-weight: 400;
+    }
+    .firma p, a{
+        font-size: xx-small;
+    }
+    .formulario{
+        width: 90%;
+    }
+    .logofinal{
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 10%;
+    }
+    .logofin{
+        width: 82%;
+        align-items: center;
+        align-self: center;
+    }
+    .cajasredes{
+        justify-content: center;
+    }
+    #sliders1 img, #sliders2 img, #sliders3 img, #sliders4 img{
+        width: 88%;
+        height: auto;
+        margin-top: 25%;
+    }
+    .galleryContainer #dotsContainer{
+        padding-top: 3px;
+        top: -30px;
+        text-align: center;
+        position: inherit;
+        top: 0;
+    }
+    .galleryContainer .slideShowContainer{
+        height: 99.50%;
+    }
+    .galleryContainer .slideShowContainer .imageHolder img{
+        object-fit: contain;
+        margin: .25% 0;
+    }
+    .galleryContainer{
+        height: 50vw;
+        padding: 0;
+        width: 100%;
+    }
+    .galleryContainer #dotsContainer .dots{
+        width: 5px;
+        height: 5px;
+    }
+    .galleryContainer .arrow{
+        width: 5px;
+        height: 5px;
+    }
+    .galleryContainer .slideShowContainer .leftArrow, .galleryContainer .slideShowContainer .rightArrow{
+        width: 20px;
+        height: 45px;
+    }
+    .galleryContainer .slideShowContainer>.captionTextHolder{
+        height: 35px;
+    }
+    .redes2 h3{
+        word-break: break-word;
+    }
+}
+/*Logo Animado*/
+.text {
+    font-size:28px;
+    font-family:helvetica;
+    font-weight:bold;
+    color:#71d90b;
+    text-transform:uppercase;
+  }
+  .parpadea {
+    
+    animation-name: parpadeo;
+    animation-duration: 2.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  
+    -webkit-animation-name:parpadeo;
+    -webkit-animation-duration: 2.5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+  }
+  
+  @-moz-keyframes parpadeo{  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+  
+  @-webkit-keyframes parpadeo {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+     100% { opacity: 1.0; }
+  }
+  
+  @keyframes parpadeo {  
+    0% { opacity: 1.0; }
+     50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+.loadPage{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100000;
+    background-color: gainsboro;
+    margin: 0 auto;
+    padding: 0;
+    display: block;
+    top: 0;
+}
+.loadPage img{
+    display: block;
+    width: 22%;
+    height: auto;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.sliders{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100000;
+    background-color: transparent;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.233);
+    padding: 0;
+    display: none;
+    top: 0;
+}
+.sliders img{
+    width: 38%;
+    border: 2px solid #03507F;
+    border-bottom-left-radius: 24%;
+    background-color: gainsboro;
+    height: 47.3vw;
+}
+/*Animaciones*/
+.animatable {
+  
+    /* initially hide animatable objects */
+    visibility: hidden;
+    
+    /* initially pause animatable objects their animations */
+    -webkit-animation-play-state: paused;   
+    -moz-animation-play-state: paused;     
+    -ms-animation-play-state: paused;
+    -o-animation-play-state: paused;   
+    animation-play-state: paused; 
+  }
+
+/* show objects being animated */
+.animated {
+    visibility: visible;
+    
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+  
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -ms-animation-play-state: running;
+    -o-animation-play-state: running;
+    animation-play-state: running;
+  }
+
+  @-webkit-keyframes bounceInLeft {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateX(-2000px);
+	}
+	60% {
+		-webkit-transform: translateX(20px);
+	}
+
+	80% {
+		-webkit-transform: translateX(-5px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+	}
+}
+
+@-moz-keyframes bounceInLeft {
+	0% {
+		opacity: 0;
+		-moz-transform: translateX(-2000px);
+	}
+
+	60% {
+		-moz-transform: translateX(20px);
+	}
+
+	80% {
+		-moz-transform: translateX(-5px);
+	}
+
+	100% {
+		opacity: 1;
+		-moz-transform: translateX(0);
+	}
+}
+
+@-o-keyframes bounceInLeft {
+	0% {
+		opacity: 0;
+		-o-transform: translateX(-2000px);
+	}
+
+	60% {
+		opacity: 1;
+		-o-transform: translateX(20px);
+	}
+
+	80% {
+		-o-transform: translateX(-5px);
+	}
+
+	100% {
+		opacity: 1;
+		-o-transform: translateX(0);
+	}
+}
+
+@keyframes bounceInLeft {
+	0% {
+		opacity: 0;
+		transform: translateX(-2000px);
+	}
+
+	60% {
+		transform: translateX(20px);
+	}
+
+	80% {
+		transform: translateX(-5px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@-webkit-keyframes bounceInRight {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateX(2000px);
+	}
+
+	60% {
+		-webkit-transform: translateX(-20px);
+	}
+
+	80% {
+		-webkit-transform: translateX(5px);
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+	}
+}
+
+@-moz-keyframes bounceInRight {
+	0% {
+		opacity: 0;
+		-moz-transform: translateX(2000px);
+	}
+
+	60% {
+		-moz-transform: translateX(-20px);
+	}
+
+	80% {
+		-moz-transform: translateX(5px);
+	}
+
+	100% {
+		opacity: 1;
+		-moz-transform: translateX(0);
+	}
+}
+
+@-o-keyframes bounceInRight {
+	0% {
+		opacity: 0;
+		-o-transform: translateX(2000px);
+	}
+
+	60% {
+		-o-transform: translateX(-20px);
+	}
+
+	80% {
+		-o-transform: translateX(5px);
+	}
+
+	100% {
+		opacity: 1;
+		-o-transform: translateX(0);
+	}
+}
+
+@keyframes bounceInRight {
+	0% {
+		opacity: 0;
+		transform: translateX(2000px);
+	}
+
+	60% {
+		transform: translateX(-20px);
+	}
+
+	80% {
+		transform: translateX(5px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@-webkit-keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+	}	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@-moz-keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-moz-transform: translateY(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		-moz-transform: translateY(0);
+	}
+}
+
+@-o-keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-o-transform: translateY(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		-o-transform: translateY(0);
+	}
+}
+
+@keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	60% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-webkit-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(20px);
+	}	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+
+@-moz-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-moz-transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		-moz-transform: translateY(0);
+	}
+}
+
+@-o-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-o-transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		-o-transform: translateY(0);
+	}
+}
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+/*Developed by BryanPawkar.com*/  
